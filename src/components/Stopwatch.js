@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./Stopwatch.module.css"
 
-export default function Stopwatch() {
+export default function Stopwatch( {addTimeMark} ) {
 	const [time, setTime] = useState({
 		sec: 0,
 		min: 0,
@@ -9,7 +9,7 @@ export default function Stopwatch() {
 	})
 
 	const [intervalId, setIntervalId] = useState()
-    const [timeMarks, setTimeMarks] = useState([])
+    
 
 	const updateTimer = () => {
 		setTime((prev) => {
@@ -30,7 +30,7 @@ export default function Stopwatch() {
 		})
 	}
 
-	const pauseOrResume = () => {
+	const handleStartPauseBtn = () => {
 		if (!intervalId) {
 			let id = setInterval(updateTimer, 1000)
 			setIntervalId(id)
@@ -40,38 +40,23 @@ export default function Stopwatch() {
 		}
 	}
 
-	const finish = () => {
+	const handleFinishBtn = () => {
 		clearInterval(intervalId)
-		const finalTimeMark = { 
-            ...time,
-            is_final : true
-        }
-        const newTimeMarks = [ ...timeMarks ]
-        newTimeMarks.push(finalTimeMark)
-        setTimeMarks(newTimeMarks)
-
-        console.log(newTimeMarks)
+		addTimeMark(time, true)
 	}
 
-    const addNewTimeElapsed = () => {
-        const partialTimeMark = { 
-            ...time,
-            is_final : false
-        }
-        const newTimeMarks = [ ...timeMarks ]
-        newTimeMarks.push(partialTimeMark)
-        setTimeMarks(newTimeMarks)
-
-        console.log(newTimeMarks)
+    const handleMarkTimeBtn = () => {
+        addTimeMark(time, false)
     }
+    
 
 	return (
 		<div className={styles.main_container}>
 			<h1>Stopwatch</h1>
 			<h2>{`${time.hr < 10 ? 0 : ""}${time.hr} : ${time.min < 10 ? 0 : ""}${time.min} : ${time.sec < 10 ? 0 : ""}${time.sec}`}</h2>
-			<button onClick={pauseOrResume}>Start/Pause</button>
-			<button onClick={finish}>Finish</button>
-            <button onClick={addNewTimeElapsed}>Next part</button>
+			<button onClick={handleStartPauseBtn}>Start/Pause</button>
+			<button onClick={handleFinishBtn}>Finish</button>
+            <button onClick={handleMarkTimeBtn}>Time Mark</button>
 		</div>
 	)
 }
