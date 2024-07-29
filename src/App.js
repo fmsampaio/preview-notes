@@ -1,6 +1,8 @@
 import './App.css';
-import Stopwatch from './components/Stopwatch';
 import { useState } from 'react';
+
+import Stopwatch from './components/Stopwatch';
+import TimeTable from './components/TimeTable';
 
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
   return (
     <div>
       <Stopwatch addTimeMark = {addTimeMark} />
+      <TimeTable timeMarks = {timeMarks} />
     </div>
   );
 }
