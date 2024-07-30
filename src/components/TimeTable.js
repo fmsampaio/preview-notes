@@ -2,7 +2,7 @@ import styles from "./TimeTable.module.css"
 import { timeToStr } from "../utils/utilities"
 import { Table } from "react-bootstrap"
 
-export default function TimeTable( {timeMarks} ) {
+export default function TimeTable( {timeElapsed} ) {
     return (
         <div className={styles.main_container}>            
             <Table className={styles.time_table}>
@@ -14,12 +14,17 @@ export default function TimeTable( {timeMarks} ) {
                 </thead>
                 <tbody>
                     {
-                        timeMarks.map( (mark) => (
+                        timeElapsed.map( (mark) => (
                             <tr>
                                 <td>
-                                    <input type="text"/>
+                                    {
+                                        (! mark.is_total) ?
+                                            <input type="text"/>
+                                        :
+                                            <input type="text" value="Total time"/>
+                                    }
                                 </td>
-                                <td>{timeToStr(mark)} {mark.is_final ? "*" : ""} </td>
+                                <td>{timeToStr(mark)} </td>
                             </tr>
                         ))
                     }

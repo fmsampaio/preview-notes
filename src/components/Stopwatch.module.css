@@ -1,5 +1,9 @@
 .main_container {
     text-align: center;
+    border: solid 1pt;
+    background-color: lightcyan;
+    width: 350px;
+    margin: auto
 }
 
 .btn_container {
