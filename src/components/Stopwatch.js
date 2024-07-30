@@ -1,6 +1,7 @@
 import { useState } from "react"
 import styles from "./Stopwatch.module.css"
 import { timeToStr } from "../utils/utilities"
+import { Button } from "react-bootstrap"
 
 export default function Stopwatch( {addTimeMark} ) {
 	const [time, setTime] = useState({
@@ -54,9 +55,17 @@ export default function Stopwatch( {addTimeMark} ) {
 	return (
 		<div className={styles.main_container}>
 			<h2>{timeToStr(time)}</h2>
-			<button onClick={handleStartPauseBtn}>Start/Pause</button>
-			<button onClick={handleFinishBtn}>Finish</button>
-            <button onClick={handleMarkTimeBtn}>Time Mark</button>
+			<div className={styles.btn_container}>
+				<div className={styles.btn_spacing}>
+					<Button variant="success" onClick={handleStartPauseBtn}>Start/Pause</Button>
+				</div>
+				<div className={styles.btn_spacing}>
+					<Button variant="secondary" onClick={handleMarkTimeBtn}>Time Mark</Button>
+				</div>
+				<div className={styles.btn_spacing}>
+					<Button variant="danger" onClick={handleFinishBtn}>Finish</Button>
+				</div>
+			</div>
 		</div>
 	)
 }
