@@ -1,5 +1,6 @@
 import { useState } from "react"
 import styles from "./Stopwatch.module.css"
+import { timeToStr } from "../utils/utilities"
 
 export default function Stopwatch( {addTimeMark} ) {
 	const [time, setTime] = useState({
@@ -32,7 +33,7 @@ export default function Stopwatch( {addTimeMark} ) {
 
 	const handleStartPauseBtn = () => {
 		if (!intervalId) {
-			let id = setInterval(updateTimer, 1000)
+			let id = setInterval(updateTimer, 1)
 			setIntervalId(id)
 		} else {
 			clearInterval(intervalId)
@@ -52,8 +53,7 @@ export default function Stopwatch( {addTimeMark} ) {
 
 	return (
 		<div className={styles.main_container}>
-			<h1>Stopwatch</h1>
-			<h2>{`${time.hr < 10 ? 0 : ""}${time.hr} : ${time.min < 10 ? 0 : ""}${time.min} : ${time.sec < 10 ? 0 : ""}${time.sec}`}</h2>
+			<h2>{timeToStr(time)}</h2>
 			<button onClick={handleStartPauseBtn}>Start/Pause</button>
 			<button onClick={handleFinishBtn}>Finish</button>
             <button onClick={handleMarkTimeBtn}>Time Mark</button>

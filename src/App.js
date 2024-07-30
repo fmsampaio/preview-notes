@@ -21,7 +21,8 @@ function App() {
 }
 
   return (
-    <div>
+    <div className='main_container'>
+      <h1>Preview Notes</h1>
       <Stopwatch addTimeMark = {addTimeMark} />
       <TimeTable timeMarks = {timeMarks} />
     </div>

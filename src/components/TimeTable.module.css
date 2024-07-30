@@ -1,0 +1,13 @@
+.main_container {
+    margin-top: 20px;
+}
+
+.time_table {
+    margin: auto;
+}
+
+.time_table td 
+{
+    text-align: center; 
+    vertical-align: middle;
+}
